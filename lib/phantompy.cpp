@@ -99,6 +99,10 @@ void ph_context_set_cookies(const char *cookies) {
     ph::CookieJar::instance()->addCookiesFromMapList(cookiesList);
 }
 
+void ph_context_set_user_agent(const char *userAgent){
+	ph::Context::instance()->setUserAgent(userAgent);
+}
+
 void ph_context_set_headers(const char *headers) {
     QJsonObject headersObject = QJsonDocument::fromJson(QByteArray(headers)).object();
     QVariantMap headersMap = headersObject.toVariantMap();

@@ -95,6 +95,12 @@ class Context(object):
         """
         lib.ph_context_set_headers(util.force_bytes(json.dumps(headers)))
 
+    def set_user_agent(self, user_agent):
+        """
+        Set default user agent
+        """
+        lib.ph_context_set_user_agent(util.force_bytes(user_agent))
+
     def process_events(self, timeout=200):
         """
         Method like a `time.sleep` but while waiths a timeout

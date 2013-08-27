@@ -15,7 +15,7 @@ typedef QHash<QString, QVariantMap> ResponsesMap;
 typedef QHash<QString, QString> Cookies;
 
 
-class Page: public QObject {
+class Page: public QWebPage {
     Q_OBJECT
 
 public:
@@ -30,22 +30,18 @@ public:
     bool isLoaded();
     bool hasLoadErrors();
 
-    QWebFrame* mainFrame();
-    QWebHistory* history();
-
     QSet<QString> requestedUrls();
     QVariantMap getResponseByUrl(const QString &url);
-
+	
 private:
     bool m_loaded;
     bool m_error;
 
     QUrl m_mainUrl;
     QEventLoop m_eventLoop;
-    QWebPage m_page;
     QSize m_viewSize;
     QVariantList m_initialCookies;
-
+    
     QSet<QString> m_requestedUrls;
     ResponsesMap m_responsesCache;
 
@@ -57,7 +53,11 @@ private:
 private slots:
     void loadFinished(bool ok);
     void replyReceived(const QVariantMap &reply);
+
+protected:
+	QString userAgentForUrl(const QUrl &_url) const;
 };
+
 
 }
 

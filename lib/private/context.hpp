@@ -39,6 +39,8 @@ public:
     void setMaximumPagesInCache(int pages);
     void setObjectCacheCapacities(int cacheMinDeadCapacity, int cacheMaxDead, int totalCapacity);
     void clearMemoryCaches();
+    void setUserAgent(const QString &userAgent);
+    QString getUserAgent();
     void setHTTPHeaders(QHash<QString, QString> &headers);
     void setHTTPHeaders(const QVariantMap &headers);
     void applyHTTPHeaders(QNetworkRequest &headers);
@@ -70,6 +72,7 @@ private:
     QTimer m_timer;
     QHash<Settings, QVariant> m_settings;
     QHash<QString, QString> m_headers;
+    QString m_userAgent;
 
     void setDefaultSettings();
 };

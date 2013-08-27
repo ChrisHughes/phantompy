@@ -10,6 +10,11 @@ Context::Context(QObject *parent): QObject(parent) {
 
     p_mutex = new QMutex();
     p_app = new QApplication(argc, &argv);
+    
+    // Sets app name and version to avoid segfault while getting default UserAgent when code is accessed outside of main library 
+    p_app->setApplicationName(QString("PhantomPy"));
+    p_app->setApplicationVersion(QString("0.0.1"));
+    
     p_ep = new EventProcessor(200, this);
 
     setDefaultSettings();
@@ -34,6 +39,14 @@ void Context::clearInstance() {
         delete contextInstance;
         contextInstance = NULL;
     }
+}
+
+QString Context::getUserAgent(){
+	return m_userAgent;
+}
+
+void Context::setUserAgent(const QString &userAgent){
+	m_userAgent = userAgent;
 }
 
 void Context::setHTTPHeaders(QHash<QString, QString> &headers){
