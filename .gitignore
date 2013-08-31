@@ -6,3 +6,8 @@ MANIFEST
 dist
 
 *egg*
+.project
+.DS_Store
+.gitignore
+.pydevproject
+.settings*
