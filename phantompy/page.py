@@ -116,6 +116,10 @@ class Page(object):
         if result != 0:
             raise RuntimeError("Error loading page")
 
+    def is_loaded(self):
+        result = lib.ph_page_is_loaded(self.ptr)
+        return result == 0
+
     def frame(self):
         frame_ptr = lib.ph_page_main_frame(self.ptr)
         return Frame(frame_ptr, self)

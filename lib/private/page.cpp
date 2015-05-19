@@ -47,6 +47,7 @@ void Page::load(const QString &_url) {
     m_mainUrl = QUrl::fromUserInput(_url);
 	QNetworkRequest request = QNetworkRequest(m_mainUrl);
 	Context::instance()->applyHTTPHeaders(request);
+	m_loaded = false;
     mainFrame()->load(request);
     mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAlwaysOff);
     mainFrame()->setScrollBarPolicy(Qt::Horizontal, Qt::ScrollBarAlwaysOff);
@@ -70,6 +71,7 @@ void Page::loadFinished(bool ok) {
     qDebug() << "Page::loadFinished(ok)";
     m_eventLoop.quit();
     m_error = ok;
+	m_loaded = true;
 }
 
 bool Page::isLoaded() {
