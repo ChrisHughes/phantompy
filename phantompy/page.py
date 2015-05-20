@@ -142,7 +142,7 @@ class Page(object):
         """
 
         response = lib.ph_page_get_reply_by_url(self.ptr, util.force_bytes(url))
-        return json.loads(util.force_text(response))
+        return json.loads(util.force_text(response).replace("\n", "\\n"), strict=False)
 
     @util.as_list
     def get_all_responses(self):
