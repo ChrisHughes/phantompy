@@ -65,6 +65,7 @@ QString Page::userAgentForUrl(const QUrl &_url) const {
 
 void Page::setViewSize(int x, int y) {
     this->m_viewSize = QSize(x, y);
+	setViewportSize(this->m_viewSize);
 }
 
 void Page::loadFinished(bool ok) {
